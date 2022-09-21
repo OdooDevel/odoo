@@ -1,0 +1,42 @@
+<odoo>
+	<data>
+
+		<record id="school_category" model="ir.module.category">
+			<field name="name">School</field>
+			<field name="sequence">10</field>
+		</record>
+
+		<record id="reg_group" model="res.groups">
+			<field name="name">Registerers</field>
+			<field name="category_id" ref="school_category"/>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="comment">Has access to students and invoices</field>
+		</record>
+
+		<record id="techers_group" model="res.groups">
+			<field name="name">Teachers</field>
+			<field name="category_id" ref="school_category"/>
+			<field name="implied_ids" eval="[(4, ref('school.reg_group'))]"/>
+			<field name="comment">Has access to students,subjects,lessons,rooms</field>
+		</record>
+
+		<record id="man_group" model="res.groups">
+			<field name="name">Maneger</field>
+			<field name="category_id" ref="school_category"/>
+			<field name="implied_ids" eval="[(4, ref('school.techers_group'))]"/>
+			<field name="comment">Has access to students,subjects,lessons,rooms,techers</field>
+		</record>
+
+		<record id="filter_graduated_students_reg" model="ir.rule">
+			<field name="name">school.student.rule.reg</field>
+			<field name="model_id" ref="model_school_student"/>
+			<field name="groups" eval="[(4,ref('school.reg_group'))]"/>
+			<field name="domain_force">[('state','!=','graudate')]</field>
+			<!-- <field name="perm_read">1</field>
+			<field name="perm_write">1</field>
+			<field name="perm_unlink">1</field>
+			<field name="perm_create">1</field> -->
+		</record>
+
+	</data>
+</odoo>

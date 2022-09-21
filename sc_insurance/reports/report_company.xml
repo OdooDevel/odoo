@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report id="sc_company_report"
+                string="Report Pdf"
+                model="sc.company"
+                report_type="qweb-pdf"
+                name="sc_insurance.sc_company_report_id"/>
+        <template id="sc_company_report_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h3 class="text-center">Company Information</h3>
+                            <br/>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Company name</th>
+                                    <th>Company position</th>
+                                    <th>Company index</th>
+                                    <th>Company No</th>
+                                    <th>Company date</th>
+                                </tr>
+                                <tr>
+                                    <td><span t-field="doc.company_name"/></td>
+                                    <td><span t-field="doc.position"/></td>
+                                    <td><span t-field="doc.company_index"/></td>
+                                    <td><span t-field="doc.company_no"/> </td>
+                                    <td><span t-field="doc.date"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+</odoo>

@@ -1,0 +1,98 @@
+<odoo>
+	<data>
+
+		<!-- menu="False"
+			paper_format="fd"/> -->
+		<report 
+			id="student_report"
+			name="school.student_report_temp"
+			model="school.student"
+			report_type="qweb-pdf"
+			string="Student Report"/>
+
+			<template id="student_report_temp">
+				<t t-call="web.html_container">
+
+					<!-- Detailed Report -->
+					<t t-call="web.external_layout">
+						<div class="page">
+
+							<t t-foreach="docs" t-as="student">
+
+								<!-- <field name="student.name"/> -->
+								<h1>Student Name</h1>
+								<h2 t-field="student.name"/>
+
+								<!-- Many2one relation -->
+								<h2 t-field="student.room_id.name"/>
+
+								<t t-foreach="student.subjects" t-as="subject">
+									<h2 t-field="subject.name"/>
+									<h2 t-field="subject.description"/>
+								</t>
+
+								-----------------------
+								| # | Name | Desc   |
+								-----------------------
+								| 1 | Arabic| Desccccc|
+
+
+								<table style="border: 1px solid gray;">
+									<tr>
+										<th style="border: 1px solid gray; padding: 5px 5px;">
+											#
+										</th>
+										<th style="border: 1px solid gray; padding: 5px 5px;">
+											Subject Name
+										</th>
+										<th style="border: 1px solid gray; padding: 5px 5px;">
+											Subject Description
+										</th>
+									</tr>
+									<tr>
+										<td style="border: 1px solid gray; padding: 5px 5px;">
+											1
+										</td>
+										<td style="border: 1px solid gray; padding: 5px 5px;">
+											Arabic
+										</td>
+										<td style="border: 1px solid gray; padding: 5px 5px;">
+											Desccccccc
+										</td>
+									</tr>
+								</table>
+
+								<t t-set="count" t-value="0"/>
+								<table class="table">
+									<tr>
+										<th>
+											#
+										</th>
+										<th>
+											Subject Name
+										</th>
+										<th>
+											Subject Description
+										</th>
+									</tr>
+									<tr t-foreach="student.subjects" t-as="subject">
+										<t t-set="count" t-value="count + 1"/>
+										<td>
+											<span t-esc="count"/> 
+										</td>
+										<td>
+											<span t-field="subject.name"/>
+										</td>
+										<td>
+											<span t-field="subject.description"/>
+										</td>
+									</tr>
+								</table>
+							</t>
+						</div>
+					</t>
+				</t>
+			</template>
+
+	</data>
+</odoo>

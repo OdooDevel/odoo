@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="employee_wizard_form" model="ir.ui.view">
+            <field name="name">employee.wizard.form</field>
+            <field name="model">employee.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="emp_name"/>
+                                <field name="emp_age"/>
+                                <field name="emp_address"/>
+                            </group>
+                            <group>
+                                <field name="emp_sequence"/>
+                                <field name="emp_job_Position"/>
+                                <field name="emp_Salary"/>
+                            </group>
+                        </group>
+                     </sheet>
+                        <footer>
+                            <button name="send_to_accept"
+                                    string="Save data"
+                                    type="object"/>
+                            <button string="Cancel Data"
+                                    special="cancel"/>
+                        </footer>
+                </form>
+            </field>
+        </record>
+        <record id="employee_wizard_action" model="ir.actions.act_window">
+            <field name="name">Employee Wizard</field>
+            <field name="res_model">employee.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="employee_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,93 @@
+<odoo>
+	<data>
+
+		<record id="airline_action" model="ir.actions.act_window">
+			<field name="name">Airlines</field>
+			<field name="res_model">agency.airline</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="flight_action" model="ir.actions.act_window">
+			<field name="name">Flights</field>
+			<field name="res_model">product.template</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="passenger_action" model="ir.actions.act_window">
+			<field name="name">Passenger</field>
+			<field name="res_model">res.partner</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="booking_action" model="ir.actions.act_window">
+			<field name="name">Bookings</field>
+			<field name="res_model">sale.order</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+
+		<record id="product_fligth_form_inherit" model="ir.ui.view">
+			<field name="name">product.template.fligth.form.inherit</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product.product_template_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//form/sheet/notebook" position="inside">
+					<page string="Agenecy">
+						<group>
+							<field name="from_loc"/>
+							<field name="to_loc"/>
+							<field name="dep_time"/>
+							<field name="ari_time"/>
+							<field name="total_time"/>
+							<field name="airline"/>
+						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="partner_passenger_form_inherit" model="ir.ui.view">
+			<field name="name">res.partner.passenger.form.inherit</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//form/sheet/notebook" position="inside">
+					<page string="Agenecy">
+						<group>
+							<field name="number"/>
+							<field name="passport_no"/>
+							<field name="flight"/>
+							<field name="bookings"/>
+						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="order_booking_form_inherit" model="ir.ui.view">
+			<field name="name">sale.order.booking.form.inherit</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//form/sheet/notebook" position="inside">
+					<page string="Agenecy">
+						<group>
+							<field name="airline"/>
+						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+
+		<menuitem id="root_menu" name="Agency"/>
+		<menuitem id="airline_menu" name="Airlines" parent="root_menu" action="airline_action"/>
+
+		<menuitem id="flight_menu" name="Flights" parent="root_menu" action="flight_action"/>
+
+		<menuitem id="passenger_menu" name="Passengers" parent="root_menu" action="passenger_action"/>
+
+		<menuitem id="booking_menu" name="Bookings" parent="root_menu" action="booking_action"/>
+
+	</data>
+</odoo>

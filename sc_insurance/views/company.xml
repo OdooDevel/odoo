@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="sc_company_action" model="ir.actions.act_window">
+            <field name="name">Info Company</field>
+            <field name="res_model">sc.company</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- ************** sc.company form Design ********************-->
+       <record id="sc_company_form" model="ir.ui.view">
+            <field name="name">sc.company.form</field>
+            <field name="model">sc.company</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Confirm" type="object" name="action_confirm"
+                        states="draft" class="oe_highlight" />
+<!--                        <button string="Mark as done" type="object" name="action_done"-->
+<!--                        states="confirmed" class="oe_highlight"/>-->
+                        <button string="Set to draft" type="object" name="action_draft"
+                                 />
+                        <button name="%(employee_wizard_action)d"
+                                string="Add Employee"
+                                type="action"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="company_name"
+                                       attrs="{'readonly':[('state','in',['confirm'])]}"/>
+                                <field name="company_index" attrs="{'readonly':[('state','in',['confirm'])]}"/>
+                                <field name="company_no" attrs="{'readonly':[('state','in',['confirm'])]}"/>
+                            </group>
+                            <group>
+                                <field name="position" attrs="{'readonly':[('state','in',['confirm'])]}"/>
+                                <field name="date" attrs="{'readonly':[('state','in',['confirm'])]}"/>
+                                <field name="manager" attrs="{'readonly':[('state','in',['confirm'])]}"/>
+<!--                                <field name="total_sum"/>-->
+<!--                                <field name="total_dec"/>-->
+<!--                                <field name="tax"/>-->
+                            </group>
+                        </group>
+                            <notebook>
+                                <page string="Branchs" >
+                                    <field name="branch_ids" attrs="{'readonly':[('state','in',['confirm'])]}"/>
+                                </page>
+                                <page string="Employees">
+                                    <field name="emp_ids">
+                                        <tree editable="bottom">
+                                            <field name="emp_name"/>
+                                            <field name="emp_age"/>
+                                            <field name="emp_address"/>
+                                            <field name="emp_sequence"/>
+                                            <field name="emp_job_Position"/>
+                                            <field name="emp_Salary"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                    </sheet>
+                </form>
+            </field>
+       </record>
+
+        <!--++++++++++ sc.company tree Design ++++++++++++++++++++-->
+        <record id="sc_company_tree" model="ir.ui.view">
+            <field name="name">sc.company.tree</field>
+            <field name="model">sc.company</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="company_name"/>
+                    <field name="company_no"/>
+                    <field name="date"/>
+                    <field name="manager"/>
+            </tree>
+            </field>
+        </record>
+
+        <!-- ____________________ sc.employee form Design ________________________-->
+         <record id="sc_employee_form" model="ir.ui.view">
+            <field name='name'>sc.employee.form</field>
+            <field name="model">sc.employee</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="emp_name"/>
+                                <field name="emp_address"/>
+                                <field name="emp_job_Position"/>
+                            </group>
+                            <group>
+                                <field name="emp_age"/>
+                                <field name="emp_sequence"/>
+                                <field name="emp_Salary"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--_____________________ sc.employee tree Design _______________________________-->
+        <record id="sc_employee_tree" model="ir.ui.view">
+            <field name="name">sc.employee.tree</field>
+            <field name="model">sc.employee</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="emp_name"/>
+                    <field name="emp_address"/>
+                    <field name="emp_job_Position"/>
+                    <field name="emp_age"/>
+                    <field name="emp_sequence"/>
+                    <field name="emp_Salary"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- +++++++++++++++++++sc.employee.child (Family) form Design +++++++++++++++++++++++ -->
+        <record id="sc_employee_child_form" model="ir.ui.view">
+            <field name='name'>sc.employee.child.form</field>
+            <field name="model">sc.employee.child</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="child_name"/>
+                                <field name="sequence"/>
+                                <field name="type"/>
+                                <field name="gender"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--================= sc.employee.child tree Design ==========================-->
+        <record id="sc_employee_child_tree" model="ir.ui.view">
+            <field name="name">sc.employee.child.tree</field>
+            <field name="model">sc.employee.child</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="child_name"/>
+                    <field name="sequence"/>
+                    <field name="type"/>
+                    <field name="gender"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- =================menuitem for company action ============================-->
+        <menuitem id="menuitem_root_id" name="Sc Insurance"/>
+        <menuitem id="company_root_id" name="Company Information" parent="menuitem_root_id" action="sc_company_action"/>
+    </data>
+
+</odoo>

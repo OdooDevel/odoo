@@ -1,0 +1,11 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+reg_student,Registers Student,model_school_student,school.reg_group,1,1,1,0
+reg_subject,Registers Subject,model_school_subject,school.reg_group,1,0,0,0
+reg_lesson,Registers Lesson,model_school_lesson,school.reg_group,1,0,0,0
+reg_room,Registers Room,model_school_room,school.reg_group,1,0,0,0
+
+
+man_student,Manager Student,model_school_student,school.man_group,1,1,1,1
+man_subject,Manager Subject,model_school_subject,school.man_group,1,1,1,1
+man_lesson,Manager Lesson,model_school_lesson,school.man_group,1,1,1,1
+man_room,Manager Room,model_school_room,school.man_group,1,1,1,1
